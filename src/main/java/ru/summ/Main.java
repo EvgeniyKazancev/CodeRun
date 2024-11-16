@@ -11,11 +11,11 @@ public class Main {
         int n = in.nextInt();
         List<List<Integer>> results = new ArrayList<>();
         findCombinations(n, n, new ArrayList<>(), results);
-
-        Collections.reverse(results);
-        for (List<Integer> combination : results) {
-            System.out.println(formatCombination(combination));
-        }
+        System.out.println(results.size());
+//        Collections.reverse(results);
+//        for (List<Integer> combination : results) {
+//            System.out.println(formatCombination(combination));
+//        }
         in.close();
     }
 

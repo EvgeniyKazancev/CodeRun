@@ -10,43 +10,45 @@ public class Main {
         Scanner in = new Scanner(System.in);
         int sale = in.nextInt();
         int bayer = in.nextInt();
-        int summ = 0;
+        long summ ;
+        if (sale < 1 || bayer < 1) {
+            System.out.println("ERROR");
+        } else {
+            int[] price = new int[sale];
+            int[] bayersPrice = new int[bayer];
+            for (int i = 0; i < sale; i++) {
+                price[i] = in.nextInt();
+            }
+            for (int i = 0; i < bayer; i++) {
+                bayersPrice[i] = in.nextInt();
+            }
 
-             int[] price = new int[sale];
-             int[] bayersPrice = new int[bayer];
-        if (sale < 1  || bayer < 1 ) {
-         System.out.println("ERROR");
-        }else {
-             List<Long> result = new ArrayList<>();
-             long temp;
-             for (int i = 0; i < sale; i++) {
-                 price[i] = in.nextInt();
-             }
-             for (int i = 0; i < bayer; i++) {
-                 bayersPrice[i] = in.nextInt();
-             }
-             Arrays.sort(price);
-             Arrays.sort(bayersPrice);
+            summ = calculateSum(price, bayersPrice);
+            System.out.println(summ);
 
-             int index = bayersPrice.length - 1;
+        }
 
-            for (int i = 0; i < price.length; i++) {
-                 int p = price[i];
-                 if (bayersPrice[index] > p) {
-                     temp = bayersPrice[index] - price[i];
-                     result.add(temp);
-                     index--;
-                 }
-             }
+    }
+    public static long calculateSum(int[] price, int[] bayersPrice) {
+        long sum = 0;
+        List<Long> result = new ArrayList<>();
 
-             for (long r : result) {
-                 summ += r;
+        Arrays.sort(price);
+        Arrays.sort(bayersPrice);
+        int index = bayersPrice.length - 1;
+        for (int i = 0; i < price.length; i++) {
+            if (index < 0) break;
 
+            if (bayersPrice[index] > price[i]) {
+                long temp = bayersPrice[index] - price[i];
+                result.add(temp);
+                index--;
+            }
+        }
 
-             }
-
-             System.out.println(summ);
-         }
-
+        for (long r : result) {
+            sum += r;
+        }
+        return sum;
     }
 }
